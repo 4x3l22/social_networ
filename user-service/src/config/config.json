@@ -1,0 +1,11 @@
+{
+  "development":{
+    "host": "localhost",
+    "port": 5432,
+    "dialect": "postgres",
+    "username": "postgres",
+    "password": "123456",
+    "database": "social_network",
+    "logging": false
+  }
+}
