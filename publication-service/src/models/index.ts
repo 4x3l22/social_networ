@@ -3,7 +3,7 @@ import path from 'path';
 import { Dialect } from 'sequelize/types';
 
 // Importa tus modelos como funciones que reciben `sequelize` y `DataTypes`
-import defineUserModel from './user';
+import definePublicationModel from './publication';
 
 // Define el tipo para el archivo de configuración
 interface DBConfig {
@@ -32,11 +32,11 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 const db: {
   sequelize: Sequelize;
   Sequelize: typeof Sequelize;
-  user: ReturnType<typeof defineUserModel>;
+  publication: ReturnType<typeof definePublicationModel>;
 } = {
   sequelize,
   Sequelize,
-  user: defineUserModel(sequelize, DataTypes),
+  publication: definePublicationModel(sequelize, DataTypes)
 };
 
 export default db;

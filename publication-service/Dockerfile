@@ -21,6 +21,6 @@ COPY --from=builder /app/dist ./dist
 
 RUN npm install --only=production
 
-EXPOSE 8083
+EXPOSE 8084
 
 CMD ["node", "dist/app.js"]

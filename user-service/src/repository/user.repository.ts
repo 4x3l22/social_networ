@@ -12,7 +12,20 @@ export class UserRepository {
     return this.userModel.create(userData);
   }
 
+  public async getAllUsers(): Promise<UserInstance[]> {
+    return this.userModel.findAll();
+  }
+
   public async findUserByAlias(alias: string): Promise<UserInstance | null> {
     return this.userModel.findOne({ where: { alias } });
   }
+
+  public async findUsersByIds(ids: number[]): Promise<UserInstance[]> {
+    return this.userModel.findAll({
+      where: {
+        id: ids,
+      },
+    });
+  }
+
 }

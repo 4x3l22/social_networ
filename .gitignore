@@ -1,3 +1,6 @@
-*user-service/dist
-node_modules
-publication-service
+user-service/dist/
+node_modules/
+*.log
+publication-service/dist/
+publication-service/node_modules/
+publication-service/src/models/userFollow.js

@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = 'SANDALO'; // 🔐 clave temporal hardcodeada
-const JWT_EXPIRES_IN = '1h'; // Duración del token, puede ser '1h', '2d', etc.
+const JWT_SECRET = 'SANDALO'; 
+const JWT_EXPIRES_IN = '1h'; 
 
 if (!JWT_SECRET) {
   throw new Error('JWT_SECRET is not defined in environment variables');
@@ -10,6 +10,8 @@ if (!JWT_SECRET) {
 export interface TokenPayload {
   id: number;
   alias: string;
+  name?: string;
+  lastName?: string;
 }
 
 export const generateToken = (payload: TokenPayload): string => {

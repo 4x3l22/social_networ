@@ -1,15 +1,16 @@
 import bcrypt from 'bcryptjs';
 import { UserRepository } from '../repository/user.repository';
-import { generateToken } from '../utils/jwt';
-import { UserCreationAttributes } from '../models/user';
+import { generateToken, verifyToken } from '../utils/jwt';
+import { UserCreationAttributes, UserInstance } from '../models/user';
 import db from '../models';
+import { UserDTO } from '../interface/user';
 
 interface LoginResponse {
   token: string;
 }
 
 interface RegisterResponse {
-  user: any; // Puedes tiparlo mejor si defines una clase `User` tipada
+  user: any; 
   token: string;
 }
 const userRepo = new UserRepository(db.user);
@@ -46,6 +47,28 @@ export const login = async (alias: string, password: string): Promise<LoginRespo
   if(!user.id){
     throw new Error('Error al iniciar sesión');
   }
-  const token = generateToken({ id: user.id, alias: user.alias });
+  const token = generateToken({ id: user.id, alias: user.alias, name: user.name, lastName: user.lastName });
   return { token };
 };
+
+export const veryfyToken = async (token: string): Promise<any> => {
+  const decoded = verifyToken(token);
+  if (!decoded) throw new Error('Token inválido');
+  return decoded;
+}
+
+export const findAllbyIds = async (ids: number[]): Promise<UserDTO[]> => {
+  const users: UserInstance[] = await userRepo.findUsersByIds(ids);
+
+  if (!users || users.length === 0) {
+    throw new Error('No se encontraron usuarios');
+  }
+
+  const result: UserDTO[] = users.map(user => ({
+    alias: user.alias,
+    name: user.name,
+    lastName: user.lastName
+  }));
+
+  return result;
+}
