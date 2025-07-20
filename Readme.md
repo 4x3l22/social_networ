@@ -14,3 +14,9 @@ Asegúrate de tener [Node.js](https://nodejs.org/) instalado en tu máquina. Lue
    ```bash
    npm install
    
+#### 2. Ejecución del servicio
+
+Una vez instaladas las dependencias, puedes ejecutar el microservicio con el siguiente comando:
+    ```bash
+    npm run dev
+
