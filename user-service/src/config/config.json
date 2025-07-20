@@ -1,6 +1,6 @@
 {
   "development":{
-    "host": "database",
+    "host": "localhost",
     "port": 5432,
     "dialect": "postgres",
     "username": "postgres",
