@@ -18,7 +18,7 @@ Asegúrate de tener [Node.js](https://nodejs.org/) instalado en tu máquina. Lue
 
 Una vez instaladas las dependencias, puedes ejecutar el microservicio con el siguiente comando:
 ```bash
-        npm run dev
-    ```
+   npm run dev
+
 
 luego se puede verificar la ruta: 
