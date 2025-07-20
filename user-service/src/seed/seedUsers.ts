@@ -19,6 +19,7 @@ export const seedUsers = async (): Promise<UserInstance[]> => {
     userRepository.createUser({ alias: 'jdoe', name: 'John', lastName: 'Doe', password: hashedPassword, dateOfBirth: new Date('1990-01-01') }),
     userRepository.createUser({ alias: 'mjane', name: 'Mary', lastName: 'Jane', password: hashedPassword, dateOfBirth: new Date('1992-02-02') }),
     userRepository.createUser({ alias: 'ssmith', name: 'Steve', lastName: 'Smith', password: hashedPassword, dateOfBirth: new Date('1988-03-03') }),
+    userRepository.createUser({ alias: 'prueba', name: 'prueba', lastName: 'prueba', password: hashedPassword, dateOfBirth: new Date('2004-01-01') })
   ]);
 
   console.log('Usuarios de prueba creados.');
