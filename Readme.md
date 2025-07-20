@@ -7,4 +7,5 @@ Asegúrate de tener [Node.js](https://nodejs.org/) instalado en tu máquina. Lue
 
 1. Navega al directorio del microservicio:
    ```bash
-   cd <nombre-del-directorio-del-microservicio>
+   cd <user-service>
+   cd <publication-service>
