@@ -94,4 +94,6 @@ http://localhost:4200/login
 ```
 
 Ahí podrás acceder al formulario de login y comenzar a usar la aplicación.
+USUARIO: `prueba`
+CONTRASEÑA: `password123`
 
