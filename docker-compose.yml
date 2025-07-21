@@ -55,6 +55,21 @@ services:
       JWT_EXPIRES_IN: 1h
     networks:
       - backend-network
+
+  frontend-service:
+    build: 
+      context: "./UI"
+      dockerfile: Dockerfile
+    container_name: frontend-service
+    ports:
+      - "4200:80"
+    depends_on:
+      - user-service
+      - publication-service
+    environment:
+      API_URL: http://localhost:8083
+    networks:
+      - backend-network
       
 volumes:
   postgres-data:

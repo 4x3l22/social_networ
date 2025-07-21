@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule, CommonModule],
+  standalone: true,
   templateUrl: './login.html',
   styleUrls: ['./login.css']  // corregido: styleUrl → styleUrls (y es un array)
 })
