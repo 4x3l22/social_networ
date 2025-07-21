@@ -4,7 +4,7 @@ export interface PublicationAttributes {
   id: number;
   title: string;
   content: string;
-  likes?: number;
+  likes: number;
   authorId: number;
   createdAt?: Date;
   updatedAt?: Date;
@@ -22,7 +22,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
     public title!: string;
     public content!: string;
     public authorId!: number;
-    public likes?: number;
+    public likes!: number;
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
   }
@@ -44,6 +44,7 @@ export default (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
       },
       likes: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         defaultValue: 0,
       },
       authorId: {

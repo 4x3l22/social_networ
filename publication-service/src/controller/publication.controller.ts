@@ -14,7 +14,7 @@ export const createPublication = async (req: Request, res: Response) => {
   try {
     // Validar token con el user-service
     const verifyResponse = await axios.post(
-      'http://publication-service:8083/api/user/verify-token',
+      'http://user-service:8083/api/user/verify-token',
       {}, // Body vacío
       {
         headers: {
@@ -23,8 +23,7 @@ export const createPublication = async (req: Request, res: Response) => {
       }
     );
 
-    const user = verifyResponse.data.user; 
-
+    const user = verifyResponse.data.decoded; 
     const publicationData = {
       ...req.body,
       authorId: user.id,
@@ -64,7 +63,7 @@ export const likePublication = async (req: Request, res: Response) => {
   try {
     // Validar token con user-service
     const verifyResponse = await axios.post(
-      'http://publication-service:8083/api/user/verify-token',
+      'http://user-service:8083/api/user/verify-token',
       {},
       {
         headers: {
@@ -76,6 +75,7 @@ export const likePublication = async (req: Request, res: Response) => {
     const user = verifyResponse.data.user;
 
     const { publicationId, likes } = req.body;
+    console.log('cuerpo de la solicitud:', req.body);
 
     const updatedPublication = await publicationService.registerLike(publicationId, likes);
 

@@ -65,9 +65,10 @@ export const findAllbyIds = async (ids: number[]): Promise<UserDTO[]> => {
   }
 
   const result: UserDTO[] = users.map(user => ({
+    id: user.id ?? 0,
     alias: user.alias,
-    name: user.name,
-    lastName: user.lastName
+    name: user.name ?? '',
+    lastName: user.lastName ?? ''
   }));
 
   return result;

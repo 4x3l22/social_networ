@@ -1,5 +1,6 @@
 export interface UserDTO {
-  alias: string;
+  id: number;
+  alias?: string;
   name?: string;
   lastName?: string;
 }

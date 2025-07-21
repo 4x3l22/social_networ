@@ -23,41 +23,75 @@ export class PublicationRepository {
   }
 
   public async findAllPublications(): Promise<PublicationDTO[]> {
-    const publications = await this.publicationModel.findAll();
+  const publications = await this.publicationModel.findAll();
 
-    const authorIds = Array.from(new Set(publications.map(pub => pub.authorId)));
+  const authorIds: number[] = Array.from(new Set(
+    publications.map(pub => Number(pub.authorId))
+  ));
 
-    const authors: AuthorDTO[] = await getAuthorsByIds(authorIds);
+  console.log('IDs de autores:', authorIds);
 
-    const authorMap: Record<number, AuthorDTO> = {};
-    authors.forEach(author => {
-      (authorMap as any)[(author as any).id] = author;
-    });
+  const authors: AuthorDTO[] = await getAuthorsByIds(authorIds);
 
-    const result: PublicationDTO[] = publications.map(pub => ({
+  console.log('Autores encontrados:', authors);
+
+  const authorMap: Record<number, AuthorDTO> = {};
+  authors.forEach(author => {
+    authorMap[author.id] = author;
+  });
+
+  console.log('Mapa de autores:', authorMap);
+
+  const result: PublicationDTO[] = publications.map(pub => {
+    const author = authorMap[Number(pub.authorId)];
+
+    return {
       id: pub.id,
       title: pub.title,
       content: pub.content,
       likes: pub.likes,
       createdAt: pub.createdAt,
-      author: authorMap[pub.authorId] || {
-        alias: authors.length > 0 ? authors[0].alias : 'Desconocido',
-        name: authors.length > 0 ? authors[0].name : 'Desconocido',
-        lastName: authors.length > 0 ? authors[0].lastName : 'Desconocido'
-      },
-    }));
+      author: author
+        ? {
+            id: author.id,
+            alias: author.alias,
+            name: author.name,
+            lastName: author.lastName
+          }
+        : {
+            id: 0,
+            alias: 'Desconocido',
+            name: 'Desconocido',
+            lastName: 'Desconocido'
+          }
+    };
+  });
 
-    return result;
-  }
+  return result;
+}
+
 
   public async registerLike(publicationId: number, likes: number): Promise<PublicationInstance | null> {
-    const publication = await this.publicationModel.findByPk(publicationId);
-    if (publication) {
-      publication.likes = likes;
-      return publication.save();
+    const id = Number(publicationId); // 👈 Conversión segura
+    console.log(`Intentando actualizar publicación con ID: ${id} y likes: ${likes}`);
+
+    const [affectedRows] = await this.publicationModel.update(
+      { likes },
+      { where: { id } }
+    );
+
+    console.log('Filas afectadas:', affectedRows);
+
+    if (affectedRows > 0) {
+      const updated = await this.publicationModel.findByPk(id);
+      console.log('Likes actualizados a:', updated?.likes);
+      return updated;
+    } else {
+      console.warn(`No se encontró la publicación con ID ${id} para actualizar`);
+      return null;
     }
-    return null;
   }
+
 
   public async getAllPublications(): Promise<PublicationInstance[]> {
     return this.publicationModel.findAll();

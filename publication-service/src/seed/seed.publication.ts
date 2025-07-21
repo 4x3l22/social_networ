@@ -13,10 +13,10 @@ export const seedPublications = async (): Promise<PublicationInstance[]> => {
   }
 
   const publications = await Promise.all([
-    publicationRepository.createPublication({ title: 'Publicación 1', content: 'Contenido de la publicación 1', authorId: 1 }),
-    publicationRepository.createPublication({ title: 'Publicación 2', content: 'Contenido de la publicación 2', authorId: 2 }),
-    publicationRepository.createPublication({ title: 'Publicación 3', content: 'Contenido de la publicación 3', authorId: 3 }),
-    publicationRepository.createPublication({ title: 'Publicación 4', content: 'Contenido de la publicación 4', authorId: 4 }),
+    publicationRepository.createPublication({ title: 'Publicación 1', content: 'Contenido de la publicación 1', authorId: 1 , likes: 2 }),
+    publicationRepository.createPublication({ title: 'Publicación 2', content: 'Contenido de la publicación 2', authorId: 2, likes: 3 }),
+    publicationRepository.createPublication({ title: 'Publicación 3', content: 'Contenido de la publicación 3', authorId: 3, likes: 5 }),
+    publicationRepository.createPublication({ title: 'Publicación 4', content: 'Contenido de la publicación 4', authorId: 4, likes: 0 }),
   ]);
 
   console.log('Publicaciones de prueba creadas.');

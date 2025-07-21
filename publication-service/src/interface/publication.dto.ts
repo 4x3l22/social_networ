@@ -1,5 +1,6 @@
 // src/dto/publication.dto.ts
 export interface AuthorDTO {
+  id: number;
   alias: string;
   name?: string;
   lastName?: string;
