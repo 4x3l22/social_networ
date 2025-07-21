@@ -1,0 +1,54 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Publicaciones</h2>
+
+  <div *ngFor="let pub of publications" class="card mb-3 shadow-sm">
+    <div class="card-header fw-bold text-primary">
+      @{{ pub.author.alias }}
+    </div>
+
+    <div class="card-body">
+      <h5 class="card-title">{{ pub.title }}</h5>
+      <p class="card-text">{{ pub.content }}</p>
+    </div>
+
+    <button 
+      class="btn btn-outline-primary btn-sm"
+      (click)="like(pub)"
+      [disabled]="likeProcessing[pub.id]">
+      <i class="bi bi-hand-thumbs-up"></i> {{ pub.likes || 0 }}
+    </button>
+
+  </div>
+</div>
+<!-- Botón flotante -->
+<button class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4 shadow-lg"
+        data-bs-toggle="modal" data-bs-target="#createPublicationModal"
+        style="width: 60px; height: 60px; font-size: 1.5rem;">
+  +
+</button>
+
+<!-- Modal para crear publicación -->
+<div class="modal fade" id="createPublicationModal" tabindex="-1" aria-labelledby="createPublicationLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form (ngSubmit)="submitPublication()" #formRef="ngForm" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createPublicationLabel">Crear publicación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="title" class="form-label">Título</label>
+          <input type="text" id="title" name="title" class="form-control" [(ngModel)]="newPublication.title" required>
+        </div>
+        <div class="mb-3">
+          <label for="content" class="form-label">Contenido</label>
+          <textarea id="content" name="content" class="form-control" [(ngModel)]="newPublication.content" required></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Publicar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

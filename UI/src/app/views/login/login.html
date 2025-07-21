@@ -1,0 +1,32 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow rounded">
+        <div class="card-header bg-primary text-white text-center">
+          <h4>Iniciar Sesión</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="username" class="form-label">Nombre de usuario</label>
+              <input type="text" class="form-control" id="username" formControlName="username" required>
+              <div *ngIf="submitted && loginForm.controls['username'].invalid" class="text-danger">
+                El nombre de usuario es obligatorio.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="password" formControlName="password" required>
+              <div *ngIf="submitted && loginForm.controls['password'].invalid" class="text-danger">
+                La contraseña es obligatoria.
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
