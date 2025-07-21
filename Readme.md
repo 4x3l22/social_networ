@@ -62,7 +62,7 @@ npm ERR! network This is a problem related to network connectivity.
 ...
 ```
 
-Este error normalmente se debe a problemas de red o un proxy mal configurado.
+Este error normalmente se debe a problemas de red.
 
 **Solución:**  
 Vuelve a ejecutar el mismo comando:
